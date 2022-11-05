@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let tarifParkir1 = 10000
+    let tarifParkir2 = 1500
+
+    let waktuIn = ["AM", "PM"]
+    let waktuMasuk = "Silahkan Masukan Waktu Masuk: \n"
+
+    for (let i = 0; i <= waktuIn.length - 1; i++) {
+        waktuMasuk += (`${i + 1}. ${waktuIn[i]}\n`)
+    }
+    let waktuOut = ["AM", "PM"]
+    let waktuKeluar = "Silahkan Masukkan Waktu Keluar: \n"
+
+    for (let i = 0; i <= waktuOut.length - 1; i++) {
+        waktuKeluar += (`${i + 1}. ${waktuOut[i]}\n`)
+    }
+    alert(`Welcome To Green Office Park 9`)
+
+    let tarifParkir = alert(`Tarif Parkir GOP 9 
+    1. 3 Jam Pertama Rp.${tarifParkir1.toLocaleString()}
+    2. 1 Jam Berikutnya Rp.${tarifParkir2}`)
+
+    // Inputan User
+
+    let jamMasuk = parseInt(prompt(`Silahkan Masukan Jam Masuk: `))
+
+    while (isNaN(jamMasuk) || jamMasuk < 1) {
+        alert(`Invalid!, Silahkan Input Ulang`)
+        jamMasuk = parseInt(prompt(`Silahkan Masukan Jam Masuk: `))
+    }
+
+    let wktMasuk = parseInt(prompt(`${waktuMasuk}`))
+
+    while (isNaN(wktMasuk) || wktMasuk < 1 || wktMasuk > 3) {
+        alert(`Invalid!, Silahkan Input Ulang`)
+        wktMasuk = parseInt(prompt(`${waktuMasuk}`))
+    }
+
+    let jamKeluar = parseInt(prompt(`Silahkan Masukan Jam Keluar: `))
+
+    while (isNaN(jamKeluar) || jamKeluar < 1) {
+        alert(`Invalid!, Silahkan Input Ulang`)
+        jamKeluar = parseInt(prompt(`Silahkan Masukan Jam Keluar: `))
+    }
+
+    let wktKeluar = parseInt(prompt(`${waktuKeluar}`))
+
+    while (isNaN(wktKeluar) || wktKeluar < 1 || wktKeluar > 3) {
+        alert(`Invalid!, Silahkan Input Ulang`)
+        wktKeluar = parseInt(prompt(`${waktuKeluar}`))
+    }
+
+    let totalJam = 0
+    function WaktuParkir(jamMasuk, jamKeluar, waktuMasuk, waktuKeluar){
+
+        
+        if (waktuMasuk === waktuKeluar) {
+            totalJam = jamKeluar - jamMasuk
+        } else {
+            totalJam = (12 - jamMasuk) + jamKeluar
+        }
+        return totalJam
+    }
+    let sumBiaya = 0
+    function TarifParkir(sumJam) {
+
+        if (sumJam <= 3) {
+            sumBiaya = 10000
+
+        } else if (sumJam > 3) {
+            sumBiaya = 10000 + ((sumJam - 3) * 1500)
+
+        }
+        return sumBiaya
+    }
+    
+    alert(`Lama Parkir: ${WaktuParkir(jamMasuk, jamKeluar, waktuMasuk, waktuKeluar)}  
+    Total Tarif: ${TarifParkir(totalJam)}`)
+
+
+
+
+
+
+</script>
+
+</html>

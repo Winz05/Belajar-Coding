@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let product = [
+        { id: 1, name: "Apel", price: 10000, stock: 10 },
+        { id: 2, name: "Jeruk", price: 15000, stock: 15 },
+        { id: 3, name: "Semangka", price: 20000, stock: 20 }
+    ]
+
+    let keranjang = [
+        { id: 1, quantity: 0 },
+        { id: 2, quantity: 0 },
+        { id: 3, quantity: 0 },
+    ]
+
+    alert(`Welcome To Purwadhika Mart`)
+    PilihanMenu()
+    
+    // Bisa Pake addEventListener window.addEventListener("load", function)
+
+    function PilihanMenu() {
+
+        let daftarBuah = "Purwadhika Mart \n\n"
+        for (let i = 0; i <= product.length - 1; i++) {
+            daftarBuah += (`${product[i].id}. ${product[i].name} - Price: Rp. ${product[i].price.toLocaleString()} - Stock: ${product[i].stock} \n`)
+        }
+
+        // Memilih Product
+
+        let pilihBuah = parseInt(prompt(`${daftarBuah} \n\n Silahkan Pilih Nomor Product yang ingin Dibeli: `))
+        while (isNaN(pilihBuah) || pilihBuah < 1 || pilihBuah > 3) {
+            alert(`Invalid!, Silahkan Input Ulang`)
+            pilihBuah = parseInt(prompt(`${daftarBuah} \n\n Silahkan Masukan Kembali Nomor Product yang ingin Dibeli: `))
+        }
+
+        // Memilih Product Selesai 
+
+        // Menginput Quantity dan Perhitungan Stock
+
+        let stokName = product[pilihBuah - 1].name
+        let stokBuah = product[pilihBuah - 1].stock
+
+        var quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah: \n\n Product: ${stokName} || Stock Saat ini: ${stokBuah} \n\n Silahkan Masukkan Jumlah Product yang ingin Dibeli: `))
+
+        while (isNaN(quantity) || quantity < 1 || quantity > stokBuah) {
+            alert(`Invalid!, Silahkan Input Ulang`)
+            quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah: \n\n Product: ${stokName} || Stock Saat ini: ${stokBuah} \n\n Silahkan Masukkan Kembali Jumlah Product yang ingin Dibeli: `))
+        }
+
+        // Menginput Quantity dan Perhitungan Stock Selesai
+
+        product[pilihBuah - 1].stock = stokBuah - quantity
+        keranjang[pilihBuah - 1].quantity += quantity
+
+        alert(`Product Berhasil Dimasukkan Kedalam Keranjang Belanja Anda`)
+
+        return CheckOut()
+    }
+
+    
+
+    // Menginput Pilihan Checkout atau Kembali Belanja
+
+    function CheckOut() {
+
+        let menu = parseInt(prompt(`Silahkan Pilih Menu: \n\n 1. CheckOut \n 2. Select Product `))
+
+        while (isNaN(menu) || menu < 1 || menu > 2) {
+            alert(`Invalid!, Silahkan Input Ulang`)
+            menu = parseInt(prompt(`Silahkan Masukkan Kembali Menu yang Anda Pilih: `))
+        }
+
+        let totalBelanja = 0
+        let cart = ""
+        for (let i = 0; i < keranjang.length; i++) {
+            if (keranjang[i].quantity > 0) {
+                totalBelanja += keranjang[i].quantity * product[i].price
+                cart += (` -> Product: ${product[i].name} || Price: Rp. ${(product[i].price).toLocaleString()} || Quantity: ${(keranjang[i].quantity)} \n Dengan Total Belanja Sebesar: Rp. ${(keranjang[i].quantity * product[i].price).toLocaleString()}\n`)
+            }
+        }
+
+        if (menu === 1) {
+            let uangBelanja = parseInt(prompt(`Keranjang Belanja Anda Saat Ini Adalah: \n ${cart} \n Maka Total Biaya Belanja Anda Sebesar Rp. ${totalBelanja.toLocaleString()} \n Silahkan Masukkan Uang Anda: `))
+            let uangKembali = uangBelanja - totalBelanja
+            while (uangKembali < 0 || isNaN(uangBelanja)) {
+                alert(`Transaksi Gagal! Jumlah Uang Anda Kurang Rp. ${uangKembali.toLocaleString()} `)
+                uangBelanja = parseInt(prompt(`Keranjang Belanja Anda Saat Ini Adalah: \n ${cart} \n Maka Total Biaya Belanja Anda Sebesar Rp. ${totalBelanja.toLocaleString()} \n Silahkan Masukkan Uang Anda Kembali: `))
+            }
+
+            if (uangKembali === 0) {
+                return alert(`Terima Kasih Telah Berbelanja di Toko Kami`)
+            } else {
+                return alert(`Uang Kembalian Anda Rp. ${uangKembali.toLocaleString()}. Terima Kasih Telah Berbelanja di Toko Kami`)
+            }
+
+        } else {
+            PilihanMenu();
+        }
+
+    }
+
+    // Menginput Pilihan Checkout atau Kembali Belanja Selesai
+</script>
+
+</html>

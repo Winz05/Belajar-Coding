@@ -1,0 +1,41 @@
+<!--  } if(totalUang >= totalBelanja){
+            alert(`Transaksi Sukses! Uang Kembalian Anda ${uangKembali.toLocaleString()}`)
+        }else{ 
+            alert(`Transaksi Gagal! Uang Anda Kurang`)
+        }-->
+
+
+
+<!--Shortcut untuk template shift + ! -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script>
+        let totalBelanja = 200000
+        let uangKembali = 0
+        alert(`Total Biaya Belanjaan Anda Adalah Rp. ${totalBelanja.toLocaleString()}`)
+        let totalUang = prompt(`Silahkan Masukan Jumlah Uang Anda: `)
+        while(isNaN(totalUang)){
+            alert(`Invalid input!`)
+            totalUang = prompt(`Mohon Masukan Kembali Jumlah Uang Anda Dengan Benar: `)
+        }
+        while(totalUang < totalBelanja){
+            uangKurang = totalUang - totalBelanja
+            alert(`Transaksi Gagal! Jumlah Uang Anda Kurang Rp. ${uangKurang.toLocaleString()} `)
+            totalUang = prompt(`Silahkan Masukan Kembali Jumlah Uang Anda: `)
+            uangKembali = totalUang - totalBelanja
+        }
+            alert(`Transaksi Sukses! Uang Kembalian Anda Rp. ${uangKembali.toLocaleString()}. Terima Kasih Telah Berbelanja di Toko Kami`)
+        
+    </script>
+</html>
+
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let Product = ["Apel", "Mangga","Jeruk"] 
+    let price = [10000, 15000, 20000]
+    let stock = [10, 15, 20]
+    let daftarBuah = "Purwadhika Mart \n"
+
+    for(let i = 0; i <= Product.length-1;i++){
+    daftarBuah += (`${i+1}. ${Product[i]} | Price: Rp.${price[i].toLocaleString()} | Stock: ${stock[i]} \n`) 
+}
+alert(`Welcome To PurwaDhika`)
+    let nomorBuah = prompt(`${daftarBuah} 
+
+Mau Beli Buah Nomer Berapa? `)
+
+while(isNaN(nomorBuah) || nomorBuah < 1 || nomorBuah > Product.length){
+alert(`Invalid Nomor Buah Tidak di Temukan`)
+nomorBuah = prompt(`${daftarBuah} 
+
+Mau Beli Buah Nomer Berapa? `)
+    } 
+
+    alert(`Transaksi Sukses! Buah yang Anda Pilih Adalah :  ${Product[nomorBuah - 1]} Dengan Harga Rp. ${price[nomorBuah-1].toLocaleString()} dan Sisa Stock Sebanyak ${(stock[nomorBuah-1] - 1)} Buah`)
+
+</script>
+</html>

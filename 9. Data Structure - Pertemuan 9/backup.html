@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    alert(`Welcome To Purwadhika Mart`)
+    // Bisa Pake addEventListener window.addEventListener("load", function)
+
+    let product = [
+        { id: 1, name: "Apel", price: 10000, stock: 10 },
+        { id: 2, name: "Jeruk", price: 15000, stock: 15 },
+        { id: 3, name: "Semangka", price: 20000, stock: 20 }
+    ]
+
+    function PilihanMenu() {
+
+        let daftarBuah = "Purwadhika Mart \n"
+        for (let i = 0; i <= product.length - 1; i++) {
+            daftarBuah += (`${product[i].id}. ${product[i].name} - Price: Rp. ${product[i].price.toLocaleString()} - Stock: ${product[i].stock} \n`)
+        }
+
+        // Memilih Product
+
+        var nomorBuah = parseInt(prompt(`${daftarBuah} 
+
+Silahkan Pilih Nomor Product yang ingin Dibeli: `))
+        while (isNaN(nomorBuah) || nomorBuah < 1 || nomorBuah > 3) {
+            alert(`Invalid!, Silahkan Input Ulang`)
+            nomorBuah = parseInt(prompt(`${daftarBuah} 
+
+Silahkan Masukan Kembali Nomor Product yang ingin Dibeli: `))
+        }
+
+        // Memilih Product Selesai 
+
+        // Menginput Quantity dan Perhitungan Stock
+
+        var stokBuah = product[nomorBuah - 1].stock
+
+        var quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah:
+
+Product: ${product[nomorBuah - 1].name} || Stock Saat ini: ${stokBuah}
+   
+Silahkan Masukkan Jumlah Product yang ingin Dibeli: `))
+
+        while (isNaN(quantity) || quantity < 1 || quantity > stokBuah) {
+            alert(`Invalid!, Silahkan Input Ulang`)
+            quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah:
+
+Product: ${product[nomorBuah - 1].name} || Stock Saat ini: ${stokBuah}
+    
+    
+Silahkan Masukkan Kembali Jumlah Product yang ingin Dibeli: `))
+        }
+        product[nomorBuah - 1].stock = stokBuah - quantity
+
+        // Menginput Quantity dan Perhitungan Stock Selesai
+
+        alert(`Product Berhasil Dimasukkan Kedalam Keranjang Belanja Anda`)
+
+        // Menginput Keranjang Belanjaan 
+
+        let cart = ""
+        var totalBelanja = (quantity * product[nomorBuah - 1].price).toLocaleString()
+
+        cart += (`Product: ${product[nomorBuah - 1].name} || Price: Rp. ${(product[nomorBuah - 1].price).toLocaleString()} || Quantity: ${quantity}
+   
+Dengan Total Belanja Sebesar: Rp. ${totalBelanja}\n`)
+
+        return CheckOut(cart)
+    }
+
+    alert(`${PilihanMenu()}`)
+    // Menginput Keranjang Belanjaan Selesai 
+
+    // Menginput Pilihan Checkout atau Kembali Belanja
+
+    function CheckOut(cart) {
+        let menu = parseInt(prompt(`Silahkan Pilih Menu:
+   
+1. CheckOut
+2. Select Product `))
+
+        while (isNaN(menu) || menu < 1 || menu > 2) {
+            alert(`Invalid!, Silahkan Input Ulang`)
+            menu = parseInt(prompt(`Silahkan Masukkan Kembali Menu yang Anda Pilih: `))
+        }
+        if (menu === 1) {
+            alert(`Keranjang Belanjaan Anda Saat ini:
+   
+${cart}`)
+            var uangBelanja = parseInt(prompt(`Silahkan Masukkan Uang Anda: `))
+            if (uangBelanja < totalBelanja || isNaN(uangBelanja)) {
+                uangKurang = uangBelanja - totalBelanja
+                alert(`Transaksi Gagal! Jumlah Uang Anda Kurang Rp. ${uangKurang.toLocaleString()} `)
+                uangBelanja = parseInt(prompt(`Silahkan Masukkan Uang Anda: `))
+            } else {
+                var uangKembali = uangBelanja - totalBelanja
+                alert(`Transaksi Sukses!`)
+                if (uangKembali = 0) {
+                    alert(`Terima Kasih Telah Berbelanja di Toko Kami`)
+                } else {
+                    alert(`Uang Kembalian Anda Rp. ${uangKembali.toLocaleString()}. Terima Kasih Telah Berbelanja di Toko Kami`)
+                }
+            }
+
+
+        } else {
+
+            PilihanMenu()
+        }
+
+    }
+// Menginput Pilihan Checkout atau Kembali Belanja Selesai
+
+
+</script>
+</html>

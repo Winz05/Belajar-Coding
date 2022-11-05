@@ -1,0 +1,24 @@
+if(nomorBuah = 1){
+    alert(`Transaksi Sukses! Buah yang Anda Pilih Adalah : ${product[0]} Dengan Harga Sejumlah ${price[0]} dan Sisa Stock Sebanyak ${stock[0] - 1}`)
+ }else if(nomorBuah = 2){
+     alert(`Transaksi Sukses! Buah yang Anda Pilih Adalah : ${product[1]} Dengan Harga Sejumlah ${price[1]} dan Sisa Stock Sebanyak ${stock[1] - 1}`)
+ }else if(nomorBuah = 3){
+     alert(`Transaksi Sukses! Buah yang Anda Pilih Adalah : ${product[2]} Dengan Harga Sejumlah ${price[2]} dan Sisa Stock Sebanyak ${stock[2] - 1}`)
+ }
+
+
+
+
+
+
+
+ if(isNaN(nomorBuah) || nomorBuah < 1 || nomorBuah > 3){
+    alert (`Invalid Input Nomor Buah Tidak di Temukan`)
+while(isNaN(nomorBuah) || nomorBuah < 1 || nomorBuah > 3){
+let nomorBuah = prompt(`${daftarBuah} 
+
+Mau Beli Buah Nomer Berapa? `)
+    alert(`Invalid Input Nomor Buah Tidak di Temukan`)
+}
+}
+alert(`Transaksi Sukses! Buah yang Anda Pilih Adalah : ${Product[nomorBuah - 1]} Dengan Harga Rp. ${price[nomorBuah-1].toLocaleString()} dan Sisa Stock Sebanyak ${stock[nomorBuah-1] - 1} Buah`)
