@@ -39,7 +39,7 @@
         // Memilih Product
 
         let pilihBuah = parseInt(prompt(`${daftarBuah} \n\n Silahkan Pilih Nomor Product yang ingin Dibeli: `))
-        while (isNaN(pilihBuah) || pilihBuah < 1 || pilihBuah > 3) {
+        while (isNaN(pilihBuah) || pilihBuah < 1 || pilihBuah > product.length) {
             alert(`Invalid!, Silahkan Input Ulang`)
             pilihBuah = parseInt(prompt(`${daftarBuah} \n\n Silahkan Masukan Kembali Nomor Product yang ingin Dibeli: `))
         }
