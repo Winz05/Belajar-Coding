@@ -12,6 +12,31 @@
 
 </body>
 <script>
+    // Step1. Menentukan Parameter yang dibutuhkan 
+    // - List Product : Name, Price dan Stock
+    // - List Keranjang : Name, Price, Quantity dan Total Belanja 
+    
+    // Step2. Membuat Daftar list Product 
+     
+    // Step3. Menentukan Inputan User yang dibutuhkan 
+    // Inputan User : Nomor Buah Yang dipilih, Quantity yang dibutuhkan dan Uang Belanja
+    // Nomor Buah : Apabila User input isNaN || <1 || > product.length Maka akan looping hingga inputan User "Benar"
+    // Quantity : Apabila User input isNaN || <1 || Quantity > Stock Buah yang ada Maka akan looping hingga inputan User "Benar"
+
+    // Step4. Membuat Pilihan Menu 
+    // - Menu Checkout
+        // Jika Pilihannya Checkout --> Tampilkan List Pembelian : Nama Buah, Harga perBuah, Quantity Buah dan Total Belanja
+        // User Menginput Uang Belanja Jika isNaN || Uang Kembali < 0 Maka akan looping Hingga "Benar"
+        // Tampilkan Uang Kembalian 
+    // - Menu Kembali Belanja 
+        // User kembali Menginput inputn User yang dibutuhkan seperti : Nomor Buah yang dipilih dan Quantity yang dibutuhkan
+        // Memasukkan inputan User ke Keranjang 
+        // Stok Buah berkurang dari Proses Pembelian Pertama
+        // Menjumlahkan Total Belanja dengan Proses Pembelian Pertama Untuk di masukkan ke Menu Checkout
+
+    // Step5. Selesai
+
+
     let product = [
         { id: 1, name: "Apel", price: 10000, stock: 10 },
         { id: 2, name: "Jeruk", price: 15000, stock: 15 },
@@ -19,9 +44,9 @@
     ]
 
     let keranjang = [
-        { id: 1, quantity: 0 },
-        { id: 2, quantity: 0 },
-        { id: 3, quantity: 0 },
+        {quantity: 0 },
+        {quantity: 0 },
+        {quantity: 0 },
     ]
 
     alert(`Welcome To Purwadhika Mart`)

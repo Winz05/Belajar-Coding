@@ -143,3 +143,23 @@ for (let i =1; i <dataNumber.length;i++){
     }
 }
 console.log(dataNumber)
+
+
+
+function SelectioSort (arr1){
+let dataMin = []
+
+    for(let i = 1; i < arr1.length;i++){
+        for(let j = 0; j < i; j++){
+            if(arr1[i] < arr1[j]){
+                dataMin = arr1[i]
+                arr1[i] = arr1[j]
+                arr1[j] = dataMin
+            }
+        }
+    }
+    return arr1
+}
+
+console.log(SelectioSort([29, 72, 98, 13, 87, 66, 52, 51, 36]))
+
