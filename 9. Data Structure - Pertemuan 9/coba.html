@@ -18,67 +18,107 @@
         { id: 3, name: "Semangka", price: 20000, stock: 20 }
     ]
 
-    let keranjangBelanja = [
-        { id: 1, quantity: 0 },
-        { id: 2, quantity: 0 },
-        { id: 3, quantity: 0 }
+    let keranjang = [
+        { quantity: 0 },
+        { quantity: 0 },
+        { quantity: 0 },
     ]
-
 
     alert(`Welcome To Purwadhika Mart`)
     PilihanMenu()
 
+    // Bisa Pake addEventListener window.addEventListener("load", function)
+
     function PilihanMenu() {
-        let daftarMenu = "Purwadhika Mart \n"
 
-        for (let i = 0; i < product.length; i++) {
-            daftarMenu += (`${product[i].id}. ${product[i].name} - Price: Rp. ${product[i].price.toLocaleString()} - Stock: ${product[i].stock} \n`)
+        let daftarBuah = "Purwadhika Mart \n\n"
+        for (let i = 0; i <= product.length - 1; i++) {
+            daftarBuah += (`${product[i].id}. ${product[i].name} - Price: Rp. ${product[i].price.toLocaleString()} - Stock: ${product[i].stock} \n`)
         }
 
-        let pilihMenu = parseInt(prompt(`${daftarMenu} \n\n Silahkan Pilih Nomor Product yang ingin Dibeli: `))
-        while (isNaN(pilihMenu) || pilihMenu < 1 || pilihMenu > product.length) {
+        // Memilih Product
+
+        const pilihBuah = parseInt(prompt(`${daftarBuah} \n Input Buah Yang Anda inginkan \n\n Silahkan Pilih Nomor Product yang ingin Dibeli: `))
+        if (pilihBuah > product.length) {
+            let input_buah = prompt(`Silahkan Input Buah Disini: `)
+            let input_price = parseInt(prompt(`Silahkan Input Harga Buah Disini: `))
+            let input_stock = parseInt(prompt(`Silahkan Input Stock Disini: `))
+
+            if (!product.includes(input_buah)) {
+                product.push({ id: pilihBuah, name: input_buah, price: input_price, stock: input_stock })
+                keranjang.push({ quantity: 0 })
+                PilihanMenu()
+            }
+        }
+        while (isNaN(pilihBuah) || pilihBuah < 1) {
             alert(`Invalid!, Silahkan Input Ulang`)
-            pilihMenu = parseInt(prompt(`${daftarMenu} \n\n Silahkan Pilih Nomor Product yang ingin Dibeli: `))
+            pilihBuah = parseInt(prompt(`${daftarBuah} \n\n Silahkan Masukan Kembali Nomor Product yang ingin Dibeli: `))
         }
 
-        let stockName = product[pilihMenu - 1].name
-        let stockQty = product[pilihMenu - 1].stock
-        let quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah: \n\n Product: ${stockName} || Stock Saat ini: ${stockQty} \n\n Silahkan Masukkan Jumlah Product yang ingin Dibeli: `))
-        while (isNaN(quantity) || quantity < 1 || quantity > stockQty) {
+        // Memilih Product Selesai 
+
+        // Menginput Quantity dan Perhitungan Stock
+
+        let stokName = product[pilihBuah - 1].name
+        let stokBuah = product[pilihBuah - 1].stock
+
+        let quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah: \n\n Product: ${stokName} || Stock Saat ini: ${stokBuah} \n\n Silahkan Masukkan Jumlah Product yang ingin Dibeli: `))
+
+        while (isNaN(quantity) || quantity < 1 || quantity > stokBuah) {
             alert(`Invalid!, Silahkan Input Ulang`)
-            quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah: \n\n Product: ${stockName} || Stock Saat ini: ${stockQty} \n\n Silahkan Masukkan Jumlah Product yang ingin Dibeli: `))
+            quantity = parseInt(prompt(`Barang yang ingin Anda Beli Adalah: \n\n Product: ${stokName} || Stock Saat ini: ${stokBuah} \n\n Silahkan Masukkan Kembali Jumlah Product yang ingin Dibeli: `))
         }
 
-        product[pilihMenu - 1].stock = stockQty - quantity
-        keranjangBelanja[pilihMenu - 1].quantity += quantity
+        // Menginput Quantity dan Perhitungan Stock Selesai
+
+        product[pilihBuah - 1].stock = stokBuah - quantity
+        keranjang[pilihBuah - 1].quantity += quantity
+
+
+
         alert(`Product Berhasil Dimasukkan Kedalam Keranjang Belanja Anda`)
 
-        return beforeCheckOut()
+        return CheckOut()
     }
 
-    function beforeCheckOut() {
-        let menuCheckOut = parseInt(prompt(`Silahkan Pilih Menu:\n1. CheckOut \n2. Select Product `))
-        while (isNaN(menuCheckOut) || menuCheckOut < 1 || menuCheckOut > 2) {
+    function InputanUser() {
+        let input_buah = prompt(`Silahkan Input Buah Disini: `)
+        let input_price = parseInt(prompt(`Silahkan Input Harga Buah Disini: `))
+        let input_stock = parseInt(prompt(`Silahkan Input Stock Disini: `))
+
+        if (!product.includes(input_buah)) {
+            product.push({ id: pilihBuah, name: input_buah, price: input_price, stock: input_stock })
+            keranjang.push({ quantity: 0 })
+        }
+    }
+
+
+    // Menginput Pilihan Checkout atau Kembali Belanja
+
+    function CheckOut() {
+
+        let menu = parseInt(prompt(`Silahkan Pilih Menu: \n\n 1. CheckOut \n 2. Select Product `))
+
+        while (isNaN(menu) || menu < 1 || menu > 2) {
             alert(`Invalid!, Silahkan Input Ulang`)
-            menuCheckOut = parseInt(prompt(`Silahkan Pilih Menu:\n1. CheckOut \n2. Select Product `))
+            menu = parseInt(prompt(`Silahkan Masukkan Kembali Menu yang Anda Pilih: `))
         }
 
         let totalBelanja = 0
         let cart = ""
-        for (let i = 0; i < keranjangBelanja.length; i++) {
-            if (keranjangBelanja[i].quantity > 0) {
-                totalBelanja += keranjangBelanja[i].quantity * product[i].price
-                cart += (` -> Product: ${product[i].name} || Price: Rp. ${(product[i].price).toLocaleString()} || Quantity: ${(keranjangBelanja[i].quantity)} \n Dengan Total Belanja Sebesar: Rp. ${(keranjangBelanja[i].quantity * product[i].price).toLocaleString()}\n`)
+        for (let i = 0; i < keranjang.length; i++) {
+            if (keranjang[i].quantity > 0) {
+                totalBelanja += keranjang[i].quantity * product[i].price
+                cart += (` -> Product: ${product[i].name} || Price: Rp. ${(product[i].price).toLocaleString()} || Quantity: ${(keranjang[i].quantity)} \n Dengan Total Belanja Sebesar: Rp. ${(keranjang[i].quantity * product[i].price).toLocaleString()}\n`)
             }
         }
 
-        if (menuCheckOut === 1) {
-            let uangBelanja = parseInt(prompt(`Keranjang Belanja Anda Saat Ini Adalah:\n ${cart} \n Maka Total Biaya Belanja Anda Sebesar Rp. ${totalBelanja.toLocaleString()} \n Silahkan Masukkan Uang Anda: `))
+        if (menu === 1) {
+            let uangBelanja = parseInt(prompt(`Keranjang Belanja Anda Saat Ini Adalah: \n ${cart} \n Maka Total Biaya Belanja Anda Sebesar Rp. ${totalBelanja.toLocaleString()} \n Silahkan Masukkan Uang Anda: `))
             let uangKembali = uangBelanja - totalBelanja
             while (uangKembali < 0 || isNaN(uangBelanja)) {
                 alert(`Transaksi Gagal! Jumlah Uang Anda Kurang Rp. ${uangKembali.toLocaleString()} `)
-                uangBelanja = parseInt(prompt(`Keranjang Belanja Anda Saat Ini Adalah:\n ${cart} \n Maka Total Biaya Belanja Anda Sebesar Rp. ${totalBelanja.toLocaleString()} \n Silahkan Masukkan Uang Anda: `))
-                uangKembali = uangBelanja - totalBelanja
+                uangBelanja = parseInt(prompt(`Keranjang Belanja Anda Saat Ini Adalah: \n ${cart} \n Maka Total Biaya Belanja Anda Sebesar Rp. ${totalBelanja.toLocaleString()} \n Silahkan Masukkan Uang Anda Kembali: `))
             }
 
             if (uangKembali === 0) {
@@ -86,10 +126,14 @@
             } else {
                 return alert(`Uang Kembalian Anda Rp. ${uangKembali.toLocaleString()}. Terima Kasih Telah Berbelanja di Toko Kami`)
             }
+
         } else {
-            return PilihanMenu();
+            PilihanMenu();
         }
+
     }
+
+    // Menginput Pilihan Checkout atau Kembali Belanja Selesai
 </script>
 
 </html>

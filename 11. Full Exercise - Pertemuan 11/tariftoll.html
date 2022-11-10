@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let tarif_toll = [
+        { id: 1, name: "jkt", tarif: 100000 },
+        { id: 2, name: "crbn", tarif: 150000 },
+        { id: 3, name: "smg", tarif: 200000 },
+        { id: 4, name: "jmbg", tarif: 250000 },
+        { id: 5, name: "sby", tarif: 300000 },
+    ]
+
+    alert(`Selamat Datang di Purwadhika Toll`)
+
+    let tarif = "Tarif Toll Purwadhika \n"
+    tarif_toll.forEach((value, index) => {
+        tarif += (`${value.id} Kota: ${value.name} Price: ${value.tarif.toLocaleString()} \n`)
+    })
+
+
+    let start = parseInt(prompt(`${tarif} \n Silahkan Masukan Pintu Masuk: `))
+    while (isNaN(start) || start < 1 || start > tarif_toll.length) {
+        alert(`Inputan Salah! Mohon Input Ulang`)
+        start = parseInt(prompt(`${tarif} \n Silahkan Masukan Pintu Masuk: `))
+    }
+
+    let tujuan = parseInt(prompt(`${tarif} \n Silahkan Masukkan Pintu Keluar: `))
+    while (isNaN(tujuan) || tujuan < 1 || tujuan > tarif_toll.length) {
+        alert(`Inputan Salah! Mohon Input Ulang`)
+        tujuan = parseInt(prompt(`${tarif} \n Silahkan Masukan Pintu Masuk: `))
+    }
+
+    let temp = 0
+    let result = 0
+
+    function Tarif(a, b) {
+        if (start > tujuan) {
+            b = a
+            temp = b
+            a = temp
+            
+        }
+        for (let i = a - 1; i < b; i++) {
+            result += tarif_toll[i].tarif
+        }    
+        
+        return result
+    }
+    
+    Tarif(start,tujuan)
+    
+    // alert(`Purwadhika Toll \n Dari Kota: ${tarif_toll[start - 1].name} \n Menuju Kota: ${tarif_toll[tujuan - 1].name} \n\n Total Biayanya Adalah: Rp.${result.toLocaleString()}`)
+
+    let total_uang = parseInt(prompt(`Purwadhika Toll \n Dari Kota: ${tarif_toll[start - 1].name} \n Menuju Kota: ${tarif_toll[tujuan - 1].name} \n\n Total Biayanya Adalah: Rp.${result.toLocaleString()}`))
+    
+    let uang_kembali = total_uang - result
+    while(isNaN(uang_kembali) || uang_kembali < 0){
+        alert(`Invalid! Uang Anda Kurang ${uang_kembali}`)
+        total_uang = parseInt(prompt(`Purwadhika Toll \n Dari Kota: ${tarif_toll[start - 1].name} \n Menuju Kota: ${tarif_toll[tujuan - 1].name} \n\n Total Biayanya Adalah: Rp.${result.toLocaleString()}`))
+    }
+
+        if (uang_kembali === 0) {
+                alert(`Terima Kasih Selamat Jalan`)
+            } else {
+                alert(`Uang Kembalian Anda Rp. ${uang_kembali.toLocaleString()}. Terima Kasih Selamat Jalan`)
+            }
+
+</script>
+
+</html>
