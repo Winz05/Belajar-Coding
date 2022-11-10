@@ -58,7 +58,7 @@ campus[9] = "Surabaya"
 console.log(campus)
 
 // 6. Slice --> (StartIndex, EndIndex) --> EndIndex tidak ikut diambil
-let huruf = ["A", "B", "C", "D", "E"]
+let huruf = ["A", "B", "C", "D", "E"] 
 huruf = huruf.slice(0,3) // A, B, C
 console.log(huruf)
 
